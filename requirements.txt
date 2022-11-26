@@ -1,0 +1,4 @@
+Pillow
+requests
+mysql-connector-python
+eel

@@ -1,11 +1,15 @@
 import os
 import time
-from PIL import Image
-from io import BytesIO
 import json
 import requests
+import codecs
+from PIL import Image
+from io import BytesIO
+from datetime import datetime, timedelta
 from utils.constants import *
-from repository import *
+from repository import Repository
+
+repository = Repository()
 
 def handleDirectory(input, query):
     rootPath = os.getcwd()
@@ -58,5 +62,33 @@ def registerLog(input, query, number):
         return
     
     timestamp = int(time.time())
-    insertLog(input, query, number, timestamp)
+    repository.insertLog(input, query, number, timestamp)
 
+def getConvertedLogs():
+    convertedLogs = []
+    logs = repository.getLogs()
+
+    for log in logs:
+        fullDate = datetime.utcfromtimestamp(log[0])
+        fullDate = fullDate - timedelta(hours=3)
+        date = f"{fullDate.day:02}/{fullDate.month:02}/{fullDate.year:04}"
+        hour = f"{fullDate.hour:02}:{fullDate.minute:02}:{fullDate.second:02}"
+        input = log[1]
+        query = log[2]
+        number = log[3]
+
+        convertedlog = [date, hour, input, query, number]
+        convertedLogs.append(convertedlog)
+        
+    return convertedLogs
+
+def downloadConvertedLogs(logs):
+    fileName = f"{int(time.time())}{TXT_FILE_NAME}"
+    path = os.path.join(OUTPUT_PATH, fileName)
+
+    with codecs.open(path, "w", "utf-8") as file:
+        for log in logs:
+            file.writelines(f"Dia: {log[0]} | Horário: {log[1]} | Arquivo: {log[2]} | Item: {log[3]} | Quantidade: {log[4]}\n")
+
+    path = f"output/{fileName}"
+    return [path, fileName]

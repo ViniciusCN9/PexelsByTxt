@@ -149,7 +149,72 @@ function switchScreen() {
         main.classList.add("display-selector")
         log.classList.remove("display-selector")
         switchScreen.innerHTML = "<i class='fa-solid fa-house'></i>"
+        refreshLogs()
     }
+}
+
+function refreshLogs() {
+    cleanLogs()
+    loadLogs()
+}
+
+function cleanLogs() {
+    const tableBody = document.getElementById("log-table-body")
+
+    while (tableBody.firstChild) {
+        tableBody.removeChild(tableBody.lastChild);
+    }
+}
+
+function loadLogs() {
+    eel.getLogs()((logs) => {
+        const container = document.getElementById("log-container")
+        const tableBody = document.getElementById("log-table-body")
+
+        if (logs.length === 0) {
+            container.innerHTML = "<h1 class='empty-log'>Nenhum registro encontrado</h1>"
+            return
+        }
+
+        logs.forEach(log => {
+            var row = document.createElement("tr")
+            row.classList.add("log-table-row")
+
+            var cellDate = document.createElement("td")
+            cellDate.innerHTML = log[0]
+            var cellHour = document.createElement("td")
+            cellHour.innerHTML = log[1]
+            var cellInput = document.createElement("td")
+            cellInput.innerHTML = log[2]
+            var cellQuery = document.createElement("td")
+            cellQuery.innerHTML = log[3]
+            var cellNumber = document.createElement("td")
+            cellNumber.innerHTML = log[4]
+
+            row.appendChild(cellDate)
+            row.appendChild(cellHour)
+            row.appendChild(cellInput)
+            row.appendChild(cellQuery)
+            row.appendChild(cellNumber)
+            tableBody.appendChild(row)
+        });
+    })
+}
+
+function downloadLogs() {
+    eel.downloadLogs()((fileInfo) => {
+        console.log(fileInfo[0])
+        download(fileInfo)
+    })
+}
+
+function download(fileInfo) {
+    var element = document.createElement("a");
+    element.setAttribute("href", fileInfo[0]);
+    element.setAttribute("download", fileInfo[1]);
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
 }
 
 window.addEventListener("load", () => {

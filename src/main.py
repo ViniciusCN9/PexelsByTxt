@@ -7,13 +7,13 @@ eel.init("web")
 
 @eel.expose
 def uploadFile(data: str, name: str):
-    with open(f"{FILE_PATH}{name}", "w") as file:
+    with open(f"{INPUT_PATH}{name}", "w") as file:
         file.write(data)
 
 @eel.expose
 def inputComboOptions():
     options = []
-    for root, dirs, files in os.walk(FILE_PATH):
+    for root, dirs, files in os.walk(INPUT_PATH):
         options = files
     return options
 
@@ -21,7 +21,7 @@ def inputComboOptions():
 def searchComboOptions(fileName):
     options = []
 
-    with open(f"{FILE_PATH}{fileName}", "r") as file:
+    with open(f"{INPUT_PATH}{fileName}", "r") as file:
         lines = file.readlines()
         for line in lines:
             if not (line == ""):
@@ -43,5 +43,16 @@ def loadImages(input:str, query:str, number):
         imagePaths = downloadImages(dirPath, imageUrls)
 
     return imagePaths
+
+@eel.expose
+def getLogs():
+    logs = getConvertedLogs()
+    return logs
+
+@eel.expose
+def downloadLogs():
+    logs = getConvertedLogs()
+    fileInfo = downloadConvertedLogs(logs)
+    return fileInfo
 
 eel.start("index.html")

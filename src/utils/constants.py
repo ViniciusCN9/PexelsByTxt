@@ -8,8 +8,11 @@ DATABASE = "pexelsbytxt"
 LOG_TABLE = "logs"
 LOG_TABLE_FIELDS = "timestamp, input, query, number"
 
-FILE_PATH = "../input/"
+INPUT_PATH = "web\\input\\"
+OUTPUT_PATH = "web\\output\\"
 IMAGES_PATH = "web\\images\\"
 
 IMAGE_EXTENSION = "png"
 IMAGE_SIZE = "original"
+
+TXT_FILE_NAME = "-Logs.txt"

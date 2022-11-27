@@ -56,11 +56,24 @@
             <div class="log-header">
                 <p>Logs do sistema</p>
                 <div class="log-header-buttons">
-                    <button class="icon-button"><i class="fa-solid fa-rotate-right"></i></button>
-                    <button class="icon-button"><i class="fa-solid fa-download"></i></button>
+                    <button class="icon-button" onclick="refreshLogs()"><i class="fa-solid fa-rotate-right"></i></button>
+                    <button class="icon-button" onclick="downloadLogs()"><i class="fa-solid fa-download"></i></button>
                 </div>
             </div>
-            <div class="log-container"></div>
+            <div id="log-container" class="log-container">
+                <table id="log-table" class="log-table">
+                    <thead id="log-table-head" class="log-table-header">
+                        <tr>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Arquivo</th>
+                            <th>Item</th>
+                            <th>Quantidade</th>
+                        </tr>   
+                    </thead>
+                    <tbody id="log-table-body"></tbody>             
+                </table>
+            </div>
         </section>
         <footer> 
             <p>Desenvolvido sem   <span class="fa-solid fa-bug"></span>   por Vinicius</p>

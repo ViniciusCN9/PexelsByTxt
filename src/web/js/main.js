@@ -95,9 +95,18 @@ async function searchImages() {
     const searchNumber = document.getElementById("search-number-items")
 
     images.classList.remove("dysplay-selector");
+    removeImages()
     await eel.loadImages(inputCombo.value, searchCombo.value, searchNumber.value)((images) => {
         showImages(images)
     })
+}
+
+function removeImages() {
+    const carroussel = document.getElementById("images-carroussel-galery")
+
+    while (carroussel.firstChild) {
+        carroussel.removeChild(carroussel.lastChild);
+    }
 }
 
 function showImages(images) {

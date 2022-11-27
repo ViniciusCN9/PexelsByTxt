@@ -6,14 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PexelsByTxt</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/spinner.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 
 <body>
     <main>
         <header>PexelsByTxt</header>
-        <section>
+        <section id="main">
             <div class="input">
                 <div class="input-combo">
                     <label for="input-combo-file">Arquivo de texto</label>
@@ -22,37 +23,48 @@
                     </select>
                 </div>
                 <div class="input-upload">
-                    <button id="input-upload-send" class="input-upload-send" onclick="uploadFile()"><i class="fa-solid fa-upload"></i></button>
+                    <button id="input-upload-send" class="icon-button" onclick="uploadFile()"><i class="fa-solid fa-upload"></i></button>
                     <input id="input-upload-file" type="file" accept="text/plain">
                 </div>
             </div>
-            <div class="search border-top dysplay-selector">
+            <div class="search border-top display-selector">
                 <div class="search-combo">
                     <label for="search-combo-items">Item</label>
-                    <select name="search-combo-items" id="search-combo-items" onchange="searchComboChange(event.target)">
+                    <select name="search-combo-items" id="search-combo-items" onchange="searchButtonCheck()">
                         <option selected="selected"></option>
                     </select>
                 </div>
                 <div class="search-number">
                     <label for="search-number-items">Quantidade de imagens</label>
-                    <input type="number" name="search-number-items" id="search-number-items" value="10" min="0", max="20" onchange="searchNumberChange(event.target)">
+                    <input type="number" name="search-number-items" id="search-number-items" value="10" min="0", max="20" onchange="searchButtonCheck()">
                 </div>
                 <button class="search-button disabled" id="search-button" onclick="searchImages()" disabled>Pesquisar</button>
             </div>
-            <div class="images dysplay-selector">
+            <div class="images display-selector">
                 <div class="images-carroussel">
-                    <button class="images-carroussel-arrow arrow-left" id="images-left-arrow" aria-label="Próxima">
+                    <button class="images-carroussel-arrow arrow-left" id="images-left-arrow" aria-label="Próxima" onclick="moveImage('left')">
                         <i class="fa-solid fa-angle-left"></i>
                     </button>
-                    <div class="images-carroussel-galery hide-scrollbar border-top border-bottom" id="images-carroussel-galery"></div>
-                    <button class="images-carroussel-arrow arrow-right" id="images-right-arrow" aria-label="Anterior">
+                    <div class="images-carroussel-galery hide-scrollbar" id="images-carroussel-galery"></div>
+                    <button class="images-carroussel-arrow arrow-right" id="images-right-arrow" aria-label="Anterior" onclick="moveImage('right')">
                         <i class="fa-solid fa-angle-right"></i>
                     </button>
                 </div>
             </div>
         </section>
+        <section id="log" class="display-selector">
+            <div class="log-header">
+                <p>Logs do sistema</p>
+                <div class="log-header-buttons">
+                    <button class="icon-button"><i class="fa-solid fa-rotate-right"></i></button>
+                    <button class="icon-button"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>
+            <div class="log-container"></div>
+        </section>
         <footer> 
-            <p>Desenvolvido sem   <span class="fa-solid fa-bug"></span>   por Vinicius<p>
+            <p>Desenvolvido sem   <span class="fa-solid fa-bug"></span>   por Vinicius</p>
+            <button id="switch-screen" class="icon-button" onclick="switchScreen()"><i class="fa-solid fa-database"></i></button>
         </footer>
     </main>
 </body>

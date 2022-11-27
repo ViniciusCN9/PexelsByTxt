@@ -70,8 +70,26 @@ footer {
     font-family: 'Roboto', sans-serif;
 }
 
+footer p,
+footer .icon-button {
+    margin-left: auto;
+}
+
+.icon-button {
+    background-color: #E5E5E5;
+    width: 40px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.icon-button i {
+    font-size: small;
+}
+
 .input,
-.search {
+.search,
+.log-header {
     width: 100%;
     height: 10%;
     display: flex;
@@ -82,24 +100,22 @@ footer {
 
 }
 
-.input-upload-send {
-    padding-inline: 10px;
-    border: 1px solid black;
-    cursor: pointer;
-    font-size: medium;
-}
-
-.input-upload-send i {
-    font-size: small;
+.log-container {
+    width: 100%;
+    height: 100%;
+    background-color: #333333;
+    overflow-y: auto;
 }
 
 .search-button {
     height: 1.6em;
     padding-inline: 10px;
-    background-color: palegreen;
+    background-color: #2C5364;
     border: 1px solid black;
     cursor: pointer;
     font-size: medium;
+    font-weight: bold;
+    color: #fff;
 }
 
 .images {
@@ -107,7 +123,7 @@ footer {
     height: 80%;
 }
 
-.dysplay-selector {
+.display-selector {
     display: none;
 }
 
@@ -122,18 +138,19 @@ footer {
 .arrow-left,
 .arrow-right {
     transition: all 600ms ease-in-out;
-    background: linear-gradient(to left, transparent 0%, black 200%);
-    opacity: 0.1;
+    background: linear-gradient(to right, transparent 0%, black 200%);
+    opacity: 1;
     cursor: pointer;
 }
 
 .images-carroussel-arrow i {
-    font-size: x-large
+    font-size: x-large;
+    color: #E5E5E5;
 }
 
 .arrow-left:hover,
 .arrow-right:hover {
-    opacity: 1;
+    opacity: 0.5;
 }
 
 select,
@@ -156,7 +173,7 @@ input[type=number] {
 .images-carroussel-arrow {
     width: 5%;
     height: 100%;
-    background-color: #E5E5E5;
+    background-color: #333333;
 }
 
 .images-carroussel-galery {
@@ -165,7 +182,7 @@ input[type=number] {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    background-color: #E5E5E5;
+    background-color: #333333;
     overflow: hidden;
     overflow-x: scroll;
 }
@@ -192,4 +209,13 @@ input[type=number] {
 .disabled {
     cursor: default;
     background-color: #E5E5E5;
+}
+
+.search .disabled {
+    color: #999;
+    font-weight: normal;
+}
+
+.justify-center {
+    justify-content: center;
 }

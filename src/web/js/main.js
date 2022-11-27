@@ -3,33 +3,22 @@ function inputComboChange(target) {
     const images = document.querySelector(".images");
 
     if (target.value === "") {
-        search.classList.add("dysplay-selector");
-        images.classList.add("dysplay-selector");
+        search.classList.add("display-selector");
+        images.classList.add("display-selector");
     }
     else {
-        search.classList.remove("dysplay-selector");
+        search.classList.remove("display-selector");
         cleanSearchOptions()
         loadSearchOptions(target.value)
     }
 }
 
-function searchComboChange(target) {
+function searchButtonCheck() {
+    const searchCombo = document.getElementById("search-combo-items");
+    const searchNumber = document.getElementById("search-number-items")
     const searchButton = document.getElementById("search-button")
 
-    if (target.value === "") {
-        searchButton.disabled = true;
-        searchButton.classList.add("disabled");
-    }
-    else {
-        searchButton.disabled = false;
-        searchButton.classList.remove("disabled");
-    }
-}
-
-function searchNumberChange(target) {
-    const searchButton = document.getElementById("search-button")
-
-    if (target.value > 0) {
+    if (searchCombo.value !== "" && searchNumber.value > 0) {
         searchButton.disabled = false;
         searchButton.classList.remove("disabled");
     }
@@ -94,9 +83,11 @@ async function searchImages() {
     const searchCombo = document.getElementById("search-combo-items");
     const searchNumber = document.getElementById("search-number-items")
 
-    images.classList.remove("dysplay-selector");
+    images.classList.remove("display-selector");
     removeImages()
+    openSpinner()
     await eel.loadImages(inputCombo.value, searchCombo.value, searchNumber.value)((images) => {
+        closeSpinner()
         showImages(images)
     })
 }
@@ -107,6 +98,28 @@ function removeImages() {
     while (carroussel.firstChild) {
         carroussel.removeChild(carroussel.lastChild);
     }
+}
+
+function openSpinner() {
+    const carroussel = document.getElementById("images-carroussel-galery")
+    const controls = document.querySelectorAll(".images-carroussel-arrow")
+
+    carroussel.classList.add("justify-center")
+    carroussel.innerHTML = "<div class='lds-ring'><div></div><div></div><div></div><div></div></div>"
+    controls.forEach(control => {
+        control.classList.add("display-selector")
+    });
+}
+
+function closeSpinner() {
+    const carroussel = document.getElementById("images-carroussel-galery")
+    const controls = document.querySelectorAll(".images-carroussel-arrow")
+
+    carroussel.classList.remove("justify-center")
+    carroussel.innerHTML = ""
+    controls.forEach(control => {
+        control.classList.remove("display-selector")
+    });
 }
 
 function showImages(images) {
@@ -120,6 +133,23 @@ function showImages(images) {
         }
         carroussel.appendChild(element)
     });
+}
+
+function switchScreen() {
+    const main = document.getElementById("main")
+    const log = document.getElementById("log")
+    const switchScreen = document.getElementById("switch-screen")
+
+    if (main.classList.contains("display-selector") && !log.classList.contains("display-selector")) {
+        main.classList.remove("display-selector")
+        log.classList.add("display-selector")
+        switchScreen.innerHTML = "<i class='fa-solid fa-database'></i>"
+    }
+    else if (!main.classList.contains("display-selector") && log.classList.contains("display-selector")) {
+        main.classList.add("display-selector")
+        log.classList.remove("display-selector")
+        switchScreen.innerHTML = "<i class='fa-solid fa-house'></i>"
+    }
 }
 
 window.addEventListener("load", () => {

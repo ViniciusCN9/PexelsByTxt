@@ -1,9 +1,11 @@
 import os
+import time
 from PIL import Image
 from io import BytesIO
 import json
 import requests
 from utils.constants import *
+from repository import *
 
 def handleDirectory(input, query):
     rootPath = os.getcwd()
@@ -46,3 +48,11 @@ def downloadImages(dirPath, images):
         imagePaths.append(imgSrc)
 
     return imagePaths
+
+def registerLog(input, query, number):
+    if (input == "" or input is None or query == "" or query is None or number == 0 or number is None):
+        return
+    
+    timestamp = int(time.time())
+    insertLog(input, query, number, timestamp)
+

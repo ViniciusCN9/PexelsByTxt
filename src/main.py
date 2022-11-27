@@ -32,7 +32,11 @@ def searchComboOptions(fileName):
 @eel.expose
 def loadImages(input:str, query:str, number):
     imagePaths = []
-    dirPath = handleDirectory(input.lower().removesuffix(".txt"), query.lower().removesuffix("\n"))
+    input = input.lower().removesuffix(".txt")
+    query = query.lower().removesuffix("\n")
+
+    registerLog(input, query, number)
+    dirPath = handleDirectory(input, query)
     imageUrls = getImages(query, number)
 
     if (imageUrls.count != 0):

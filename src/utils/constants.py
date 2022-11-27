@@ -5,6 +5,8 @@ HOST = "localhost"
 USER = "root"
 PASSWORD = "root"
 DATABASE = "pexelsbytxt"
+LOG_TABLE = "logs"
+LOG_TABLE_FIELDS = "timestamp, input, query, number"
 
 FILE_PATH = "../input/"
 IMAGES_PATH = "web\\images\\"

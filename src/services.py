@@ -9,8 +9,12 @@ from repository import *
 
 def handleDirectory(input, query):
     rootPath = os.getcwd()
+    imagePath = os.path.join(rootPath, IMAGES_PATH)
     inputPath = os.path.join(rootPath, IMAGES_PATH, input)
     queryPath = os.path.join(inputPath, query)
+
+    if not os.path.isdir(imagePath):
+        os.mkdir(imagePath)
 
     if not os.path.isdir(inputPath):
         os.mkdir(inputPath)

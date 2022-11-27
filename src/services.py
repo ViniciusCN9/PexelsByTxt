@@ -83,6 +83,9 @@ def getConvertedLogs():
     return convertedLogs
 
 def downloadConvertedLogs(logs):
+    if not os.path.isdir(OUTPUT_PATH):
+        os.mkdir(OUTPUT_PATH)
+
     fileName = f"{int(time.time())}{TXT_FILE_NAME}"
     path = os.path.join(OUTPUT_PATH, fileName)
 

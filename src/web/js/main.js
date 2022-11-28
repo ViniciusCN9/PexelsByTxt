@@ -168,36 +168,42 @@ function cleanLogs() {
 
 function loadLogs() {
     eel.getLogs()((logs) => {
-        const container = document.getElementById("log-container")
+        const empty = document.getElementById("empty-log")
+        const table = document.getElementById("log-table")
         const tableBody = document.getElementById("log-table-body")
 
         if (logs.length === 0) {
-            container.innerHTML = "<h1 class='empty-log'>Nenhum registro encontrado</h1>"
+            empty.classList.remove("display-selector")
+            table.classList.add("display-selector")
             return
         }
+        else {
+            empty.classList.add("display-selector")
+            table.classList.remove("display-selector")
 
-        logs.forEach(log => {
-            var row = document.createElement("tr")
-            row.classList.add("log-table-row")
+            logs.forEach(log => {
+                var row = document.createElement("tr")
+                row.classList.add("log-table-row")
 
-            var cellDate = document.createElement("td")
-            cellDate.innerHTML = log[0]
-            var cellHour = document.createElement("td")
-            cellHour.innerHTML = log[1]
-            var cellInput = document.createElement("td")
-            cellInput.innerHTML = log[2]
-            var cellQuery = document.createElement("td")
-            cellQuery.innerHTML = log[3]
-            var cellNumber = document.createElement("td")
-            cellNumber.innerHTML = log[4]
+                var cellDate = document.createElement("td")
+                cellDate.innerHTML = log[0]
+                var cellHour = document.createElement("td")
+                cellHour.innerHTML = log[1]
+                var cellInput = document.createElement("td")
+                cellInput.innerHTML = log[2]
+                var cellQuery = document.createElement("td")
+                cellQuery.innerHTML = log[3]
+                var cellNumber = document.createElement("td")
+                cellNumber.innerHTML = log[4]
 
-            row.appendChild(cellDate)
-            row.appendChild(cellHour)
-            row.appendChild(cellInput)
-            row.appendChild(cellQuery)
-            row.appendChild(cellNumber)
-            tableBody.appendChild(row)
-        });
+                row.appendChild(cellDate)
+                row.appendChild(cellHour)
+                row.appendChild(cellInput)
+                row.appendChild(cellQuery)
+                row.appendChild(cellNumber)
+                tableBody.appendChild(row)
+            })
+        }
     })
 }
 
